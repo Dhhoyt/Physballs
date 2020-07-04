@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import pygame
 import time
 import pygame
