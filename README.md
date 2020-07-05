@@ -10,7 +10,7 @@ as fun and accessible as it can be! it will also work as a tool for my future pr
 * [Pygame](https://www.pygame.org/)
 
 ## Installing
-To install Physballs you first need Python 3.x you will also need git.
+To install Physballs you first need Python 3.7.x you will also need git.
 
 1. Open your terminal and past the following command.
 `git clone https://github.com/xsync3d/Physballs`
