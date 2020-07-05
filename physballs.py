@@ -1,13 +1,5 @@
-#!/usr/bin/python
-
-import pygame
-import time
 import pygame
 import sys
-
-
-def apply_force():
-    pass
 
 
 def open_window():
@@ -16,7 +8,6 @@ def open_window():
     pygame.init()
     pygame.display.set_caption("Physballs")
     screen = pygame.display.set_mode((width, height))
-    fps = pygame.time.Clock()
 
     class Planet:
 
@@ -28,11 +19,9 @@ def open_window():
             self.color = (255, 160, 153)
             self.thickness = 40
 
-        def move(self, x, y):
-            pass
-
         def display(self):
             pygame.draw.circle(screen, self.color, (self.x, self.y), self.size, self.thickness)
+            print("test")
 
     while True:
 
@@ -40,6 +29,7 @@ def open_window():
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
+
                 sys.exit()
 
         screen.fill(bg_color)
@@ -47,15 +37,8 @@ def open_window():
         planet1.display()
 
         # Make the most recently drawn screen visible.
-        pygame.display.flip()
 
-        # Frame independent physics, scrapped until further testing.
-        """prev_time = time.time()
-        pygame.display.update()
-        delta = time.time() - prev_time
-        move_distance = delta * 64  # Would move 64 pixels per second because delta is a fraction of a second
-        prev_time = time.time()
-        """
+        pygame.display.flip()
 
 
 open_window()
