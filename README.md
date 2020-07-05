@@ -1,9 +1,13 @@
 # Physballs
 
-## A small physics simulations engine
+#### A small physics simulations engine
 
 Physballs is a small game that simulates a small solar system. The goal is to make Physballs
 as fun and accessible as it can be! it will also work as a tool for my future projects.
+
+##Technologies
+* [Python 3.7.4](https://www.python.org/)
+* [Pygame](https://www.pygame.org/)
 
 ## Installing
 To install Physballs you first need Python 3.x you will also need git.
