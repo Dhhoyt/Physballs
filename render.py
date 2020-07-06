@@ -46,6 +46,7 @@ def loop(a_screen, bg_color):
 # TODO in the future use pygame.font.get_init() to debug.
 
 def display_text(text):
-    text_font = pygame.font.SysFont("consolas", 14, False, False)
-    pygame.font.Font.render(text_font, text, False, white, background=None)
-    pygame.display.update()
+    text_font = pygame.font.SysFont("consolas", 100)
+    text_surface = text_font.render(text, False, (0, 255, 0))
+    screen.blit(text_surface, (10, 10))
+
