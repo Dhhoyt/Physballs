@@ -3,6 +3,7 @@ from render import screen
 
 planets = []
 
+
 class Planet:
 
     # Size = Thickness obviously.
@@ -19,7 +20,3 @@ class Planet:
 
 def create_planet(x_pos, y_pos, a_size):
     planets.append(Planet(x_pos, y_pos, a_size))
-
-
-def create_planet():
-    pass
