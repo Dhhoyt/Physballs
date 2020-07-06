@@ -1,6 +1,7 @@
 import pygame
 import time
 import sys
+import controls
 
 (width, height) = (1200, 720)
 screen = pygame.display.set_mode((width, height), 0, 32)
@@ -23,9 +24,6 @@ def loop(a_screen, bg_color):
     # Game loop starts here.
     while True:
 
-        # Get x, y coordinates of the pointer.
-        print(pygame.mouse.get_pos())
-
         # Set up for frame independent physics
         delta_t = time.time() - last_time
         delta_t *= 60
@@ -39,14 +37,14 @@ def loop(a_screen, bg_color):
 
         a_screen.fill(bg_color)
         # Make the most recently drawn screen visible.
-        display_text("test")
+        display_text("Pointer coordinates: " + str(controls.get_mouse_pos()), a_screen, bg_color)
         pygame.display.flip()
 
 
 # TODO in the future use pygame.font.get_init() to debug.
 
-def display_text(text):
-    text_font = pygame.font.SysFont("consolas", 100)
+def display_text(text, a_screen, bg_color):
+    a_screen.fill(bg_color)
+    text_font = pygame.font.SysFont("consolas", 14)
     text_surface = text_font.render(text, False, (0, 255, 0))
     screen.blit(text_surface, (10, 10))
-
