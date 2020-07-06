@@ -39,7 +39,7 @@ def loop(a_screen, bg_color):
 
         a_screen.fill(bg_color)
         # Make the most recently drawn screen visible.
-
+        display_text("test")
         pygame.display.flip()
 
 
@@ -47,4 +47,5 @@ def loop(a_screen, bg_color):
 
 def display_text(text):
     text_font = pygame.font.SysFont("consolas", 14, False, False)
-    pygame.font.Font.render(text, False, white, background=None)
+    pygame.font.Font.render(text_font, text, False, white, background=None)
+    pygame.display.update()
