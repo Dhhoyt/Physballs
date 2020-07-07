@@ -16,13 +16,13 @@ def open_window():
     pygame.init()
     pygame.display.set_caption("Physballs")
     pygame.mouse.set_pos((midScreenX, midScreenY))
-    loop(screen, bg_color)
+    loop(screen, bg_color, True)
 
 
-def loop(a_screen, bg_color):
+def loop(a_screen, bg_color, running):
     last_time = time.time()
     # Game loop starts here.
-    while True:
+    while running:
 
         # Set up for frame independent physics
         delta_t = time.time() - last_time
@@ -33,12 +33,15 @@ def loop(a_screen, bg_color):
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
+                running = False  # Be IDLE friendly
                 sys.exit()
 
         a_screen.fill(bg_color)
         # Make the most recently drawn screen visible.
         display_text("Pointer coordinates: " + str(controls.get_mouse_pos()), a_screen, bg_color)
         pygame.display.flip()
+
+    pygame.quit()
 
 
 # TODO in the future use pygame.font.get_init() to debug.
