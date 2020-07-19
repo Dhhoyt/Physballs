@@ -1,6 +1,5 @@
 import pygame
 import time
-import sys
 import controls
 import planets
 
@@ -25,33 +24,34 @@ def loop(a_screen, bg_color, running):
 
     # Game loop starts here.
     while running:
-
         # Set up for frame independent physics
         delta_t = time.time() - last_time
         delta_t *= 60
         last_time = time.time()
 
         # Watch for keyboard and mouse events.
-        for event in pygame.event.get():
+        controls.check_event(running)
 
-            if event.type == pygame.QUIT:
-                running = False
-                sys.exit()
+        # Update game elements.
 
-        for planet in planets.planets:
-            a_screen.fill(bg_color)
-            display_text(str(planets.create_planet(midScreenX, midScreenY, 40)), a_screen, bg_color, (80, 80))
+        planets.iterate_planets()
 
-        # a_screen.fill(bg_color)
-        display_text("Pointer coordinates: " + str(controls.get_mouse_pos()), a_screen, bg_color, (10, 10))
-        # Make the most recently drawn screen visible.
+        # Fill canvas
+        a_screen.fill(bg_color)
+
+        # Draw surfaces.
+
+        # Update surface.
         pygame.display.flip()
 
     pygame.quit()
 
 
-def display_text(text, a_screen, bg_color, pos: tuple):
+# TODO implement MORE DEBUGGING AAA
+
+
+def display_text(text, a_screen, bg_color):
     a_screen.fill(bg_color)
     text_font = pygame.font.SysFont("consolas", 14)
     text_surface = text_font.render(text, False, (0, 255, 0))
-    screen.blit(text_surface, pos)
+    screen.blit(text_surface, (10, 10))
