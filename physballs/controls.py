@@ -16,7 +16,7 @@ def check_event(running):
                 print("click")
 
                 # TODO: Change pos so it equals the mouse position
-                ball.add_ball((0, 0), 5, (0, 0), render.white)
+             #   ball.add_ball(pygame.mouse.get_pos(), 5, (0, 0), render.white)
 
         if event.type == pygame.QUIT:
             running = False

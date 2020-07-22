@@ -1,13 +1,19 @@
 import time
 import pygame
+from physics import gravity
 import controls
+import schedule
 import sys
-from graphics.render import display_text
+
+schedule.every(0.001).seconds.do(gravity.calc_pos)
 
 
 def loop(a_screen, bg_color, running):
     last_time = time.time()
     # Game loop starts here.
+
+    gravity.random_balls()
+
     while running:
 
         # Set up for frame independent physics
@@ -22,11 +28,11 @@ def loop(a_screen, bg_color, running):
                 running = False  # Be IDLE friendly
                 sys.exit()
 
-        #fill
+        # fill
         a_screen.fill(bg_color)
-        #draw
-        display_text("Pointer coordinates: " + str(controls.get_mouse_pos()), a_screen, bg_color)
-        #display
+        # draw
+        schedule.run_pending()
+        # display
         pygame.display.flip()
 
     pygame.quit()

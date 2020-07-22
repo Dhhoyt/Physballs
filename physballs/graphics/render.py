@@ -14,11 +14,6 @@ white = (255, 255, 255)
 red = (255, 0, 0)
 
 
-def draw():
-    pygame.display.flip()
-    screen.fill(color)
-
-
 def add_line(line_color, start_pos, end_pos):
     pygame.draw.line(screen, line_color, (int(start_pos[0]), int(start_pos[1])), (int(end_pos[0]), int(end_pos[1])),
                      lineWidth)

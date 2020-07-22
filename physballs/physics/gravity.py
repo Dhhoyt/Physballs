@@ -2,16 +2,12 @@ import math
 import random
 import schedule
 from ball import Ball
+from ball import *
 from graphics import render
-
 
 speed = 1
 g_const = 1
-running = True
 step = 0
-
-
-
 
 
 def calc_force(ball1, ball2):
@@ -28,13 +24,12 @@ def calc_force(ball1, ball2):
         new_xp = (ball1.pos[0] + ball2.pos[0]) / 2
         # New y pos.
         new_yp = (ball1.pos[1] + ball2.pos[1]) / 2
-        print(new_xp, new_yp)
-        print(new_xv, new_yv)
+
         add_ball((new_xp, new_yp), ball1.size + ball2.size, (new_xv, new_yv), (255, 255, 255))
-        if ball1 in balls:
-            balls.remove(ball1)
-        if ball2 in balls:
-            balls.remove(ball2)
+        if ball1 in Ball.balls:
+            Ball.balls.remove(ball1)
+        if ball2 in Ball.balls:
+            Ball.balls.remove(ball2)
         return 0, 0
     force = (before_force / dist)
     if x_dist == 0:
@@ -52,58 +47,48 @@ def calc_force(ball1, ball2):
     return x_force, y_force
 
 
-for i in range(5):
-    vel = (random.random() - 0.5, random.random() - 0.5)
-    pos = (random.randint(0, render.size[0]), random.randint(0, render.size[1]))
-    rand_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
-    add_ball(pos, random.randint(3, 50), vel, rand_color)
+# This function is for debugging purposes.
+
+def random_balls():
+    for i in range(5):
+        vel = (random.random() - 0.5, random.random() - 0.5)
+        pos = (random.randint(0, render.width), random.randint(0, render.height))
+        rand_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        add_ball(pos, random.randint(3, 50), vel, rand_color)
 
 
 def calc_pos():
-    for ball in balls:
-        if ball not in balls:
-            print("g")
-            continue
+    for ball in Ball.balls:
         x_vel = ball.velocity[0]
         y_vel = ball.velocity[1]
-        for j in balls:
+        for j in Ball.balls:
             if ball == j:
                 continue
+
             force = calc_force(ball, j)
             x_vel += (force[0] / ball.size)
             y_vel += (force[1] / ball.size)
+
         x_pos = (ball.pos[0] + x_vel)
-        y_pos = (ball.pos[1] + y_vel)
+
         if x_pos < 0:
-            print(x_pos)
-            print("here")
             x_pos = 1
             x_vel = 0
         if x_pos > render.size[0]:
-            print(x_pos)
-            print("here")
             x_pos = render.size[0] - 1
             x_vel = 0
         y_pos = (ball.pos[1] + y_vel)
         if y_pos < 0:
-            print(y_pos)
-            print("here")
             y_pos = 1
             y_vel = 0
         if y_pos > render.size[1]:
-            print(y_pos)
-            print("here")
             y_pos = render.size[1] - 1
             y_vel = 0
+
         ball.future_pos = (x_pos, y_pos)
         ball.velocity = (x_vel, y_vel)
-        render.set_point_size()(ball.radius)
+        render.set_point_size(ball.radius)
         render.add_point(ball.color, ball.pos)
-    render.draw()
-    for ball in balls:
+
+    for ball in Ball.balls:
         ball.pos = ball.future_pos
-
-
-schedule.every(0.001).seconds.do(calc_pos())
-while True:
-    schedule.run_pending()
