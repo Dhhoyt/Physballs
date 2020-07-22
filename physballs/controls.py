@@ -1,7 +1,7 @@
 import pygame
 import sys
-import render
-import planets
+import graphics.render as render
+import ball
 
 
 # TODO make it so when a player clicks a planet is created in that position
@@ -14,7 +14,9 @@ def check_event(running):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 print("click")
-                planets.create_planet((73, 78), 40)
+
+                # TODO: Change pos so it equals the mouse position
+             #   ball.add_ball(pygame.mouse.get_pos(), 5, (0, 0), render.white)
 
         if event.type == pygame.QUIT:
             running = False
